@@ -18,12 +18,28 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        inject: true
+      }),
+      new WebpackPwaManifest({
+        name: 'My Progressive Web App',
+        short_name: 'MyPWA',
+        description: 'My awesome Progressive Web App!',
+        background_color: '#ffffff',
+        crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      }),
+      new InjectManifest({
+        
+      })
     ],
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
       ],
     },
   };
